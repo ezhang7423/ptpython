@@ -43,6 +43,7 @@ from pygments.lexers import PythonLexer, PythonTracebackLexer
 from pygments.token import Token
 
 from .python_input import PythonInput
+from .config import configure as overriden_config
 
 try:
     from ast import PyCF_ALLOW_TOP_LEVEL_AWAIT  # type: ignore
@@ -724,6 +725,7 @@ def embed(
     if configure:
         configure(repl)
 
+    overriden_config(repl)
     # Start repl.
     patch_context: ContextManager = (
         patch_stdout_context() if patch_stdout else DummyContext()
