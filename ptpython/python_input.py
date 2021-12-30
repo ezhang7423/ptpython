@@ -39,7 +39,22 @@ from prompt_toolkit.key_binding import (
     KeyBindings,
     merge_key_bindings,
 )
-from prompt_toolkit.key_binding.bindings.auto_suggest import load_auto_suggest_bindings
+def modify_and_import(module_name, package, modification_func):
+    import importlib.util
+    import sys
+    spec = importlib.util.find_spec(module_name, package)
+    source = spec.loader.get_source(module_name)
+    new_source = modification_func(source)
+    module = importlib.util.module_from_spec(spec)
+    codeobj = compile(new_source, module.__spec__.origin, 'exec')
+    exec(codeobj, module.__dict__)
+    sys.modules[module_name] = module
+    return module
+
+auto_suggest = modify_and_import('prompt_toolkit.key_binding.bindings.auto_suggest', None, lambda src: src.replace('right',
+        'end'))
+load_auto_suggest_bindings = auto_suggest.load_auto_suggest_bindings
+
 from prompt_toolkit.key_binding.bindings.open_in_editor import (
     load_open_in_editor_bindings,
 )
