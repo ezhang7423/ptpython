@@ -9,9 +9,9 @@ with open(os.path.join(os.path.dirname(__file__), "README.rst")) as f:
 
 
 setup(
-    name="ptpython",
+    name="ezipeptpython",
     author="Jonathan Slenders",
-    version="3.0.20",
+    version="3.0.22",
     url="https://github.com/prompt-toolkit/ptpython",
     description="Python REPL build on top of prompt_toolkit",
     long_description=long_description,

@@ -84,7 +84,7 @@ def create_parser() -> _Parser:
         "-V",
         "--version",
         action="version",
-        version=metadata.version("ptpython"),  # type: ignore
+        version=metadata.version("ezipeptpython"),  # type: ignore
     )
     parser.add_argument("args", nargs="*", help="Script and arguments")
     return parser
